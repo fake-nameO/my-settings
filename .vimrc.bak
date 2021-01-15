@@ -1,0 +1,137 @@
+source ~/.vim/config/auto.vim
+
+
+call plug#begin('~/.vim/plugged')
+
+
+Plug 'frazrepo/vim-rainbow'
+Plug 'morhetz/gruvbox'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'dracula/vim',{'as':'dracula'}
+
+
+Plug 'davidhalter/jedi-vim'
+
+Plug 'neoclide/coc.nvim',{'branch': 'release'}
+
+
+call plug#end()
+
+
+:set background=dark
+colorscheme gruvbox
+
+" dracula 
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_termcolors = 256
+
+
+
+
+
+set signcolumn=yes
+
+
+syntax enable
+set noerrorbells
+set tabstop=3 softtabstop=3
+set shiftwidth=3
+set expandtab
+set scrolloff=10
+set laststatus=2 " show status line always
+set ttyfast
+set mouse=a
+set smartindent
+set autoindent
+set t_Co=256
+
+set showcmd
+set autowrite
+set showmatch
+set ignorecase 
+set nu
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+
+
+
+
+          
+set clipboard+=unnamedplus
+
+
+set colorcolumn=100
+highlight colorcolumn ctermbg=0 guibg=lightgrey
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
+set nocompatible
+set comments=sl:/*,mb:\ *,elx:\ */
+
+""in normal mode F2 will save the file
+"       "nmap <F3> :w<CR>
+"" in insert mode F2 will exit insert, save, enters insert again
+imap <S-F3> <ESC>:w<CR>i
+" switch between header/source with F4
+map <F3>  :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+" recreate tags file with F5
+map <F5> :!ctags -R –c++-kinds=+p –fields=+iaS –extra=+q .<CR>
+" create doxygen comment
+map <F6> :Dox<CR>
+" build using makeprg with <F7>
+map <F7> :make<CR>
+" build using makeprg with <S-F7>
+map <S-F7> :make clean all<CR>
+" goto definition with F12
+map <F12> <C-]>
+
+
+" split scree
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" vim-rainbow
+au FileType c,cpp ,py ,dart ,html ,css call rainbow#load()
+
+
+" rainbow
+
+let g:rainbow_active = 1
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+    \ ]
+
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+
+
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+autocmd vimEnter *.cpp map <F1> :w <CR> :!clear ; g++ --std=c++17 %; if [ -f a.out ]; then time ./a.out; rm a.out; fi <CR>
+
+map <F2> :!gdb ./%:r <CR>
+
+"set background=dark
+set cursorline
+filetype plugin indent on
+
+let g:plug_timeout=9999999
+
+
