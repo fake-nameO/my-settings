@@ -20,6 +20,7 @@ alias ls='ls --color=auto'
     PS1+='\[$(tput sgr0)\]';
     export PS1;
 
+#20:12:35 / ->  cd /opt/visual-studio-code/resources/app/extensions/
 
     alias freethe="sync; echo 3 > /proc/sys/vm/drop_caches"
 # alias
@@ -28,7 +29,7 @@ alias n=nvim;
 alias ll="ls -la";
 alias c=clear;
 alias e=exit;
-
+alias code="unshare -n code";
 
 #neofetch
 #android home
